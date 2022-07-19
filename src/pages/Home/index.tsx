@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import "./styles.css";
 
-import { Card } from "../../components/card";
+import { Card, CardProps } from "../../components/card";
+
+interface ApiResponse {
+  name: string;
+  avatar_url: string;
+}
+
+interface User {
+  name: string;
+  avatar: string;
+}
 
 export function Home() {
   const [studentName, setStudentName] = useState("");
-  const [students, setStudent] = useState([]);
-  const [user, setUser] = useState({ name: "", avatar: "" });
-  const [GithubUser, setGithubUser] = useState("");
+  const [students, setStudent] = useState<CardProps[]>([]);
+  const [user, setUser] = useState<User>({} as User);
+  const [GithubUser, setGithubUser] = useState("" as string);
   const [style, setStyle] = useState("popover");
 
-function handleAddGithubUser(user) {
+function handleAddGithubUser() {
     setStyle("disabled")
   }
 
@@ -32,7 +42,7 @@ function handleAddGithubUser(user) {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`https://api.github.com/users/${GithubUser}`);
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       setUser({
         name: data.name,
