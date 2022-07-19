@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
 }
 
 .container header {
@@ -55,4 +56,32 @@
 
 .container button:hover {
   filter: brightness(0.9);
+}
+
+.popover{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  width: 100vh;
+  height: 100vh;
+
+}
+
+.popover div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 800px;
+  height: 800px;
+  border-radius: .31rem;
+
+  background: #C4C4CC;
+}
+
+.disabled {
+  display: none;
 }

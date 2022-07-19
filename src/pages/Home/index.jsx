@@ -7,6 +7,14 @@ export function Home() {
   const [studentName, setStudentName] = useState("");
   const [students, setStudent] = useState([]);
   const [user, setUser] = useState({ name: "", avatar: "" });
+  const [GithubUser, setGithubUser] = useState("");
+  const [style, setStyle] = useState("popover");
+
+function handleAddGithubUser(user) {
+    setStyle("disabled")
+  }
+
+  console.log(GithubUser);
 
   function handleAddStudent() {
     const newStudent = {
@@ -23,7 +31,7 @@ export function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("https://api.github.com/users/birobirobiro");
+      const response = await fetch(`https://api.github.com/users/${GithubUser}`);
       const data = await response.json();
 
       setUser({
@@ -33,10 +41,17 @@ export function Home() {
     }
 
     fetchData();
-  }, []);
+  }, [GithubUser]);
 
   return (
     <div className="container">
+      <div className={style}>
+        <div>
+          <h1>Digite seu Usuário do Github</h1>
+          <input type="text" onChange={(e) => setGithubUser(e.target.value)} />
+          <button onClick={handleAddGithubUser}>Logar</button>
+        </div>
+      </div>
       <header>
         <h1>Lista de presença</h1>
 
